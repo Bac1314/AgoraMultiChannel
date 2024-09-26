@@ -33,11 +33,11 @@ struct MainView: View {
                     ForEach(agoraVM.rtcConnections) { connectionView in
                         connectionView.remoteUIViewRepresent
                             .matchedGeometryEffect(id: connectionView.id, in: animationNamespace)
-                            .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
+                            .frame(maxWidth: .infinity)
                             .aspectRatio(3/4, contentMode: .fit)
                             .clipShape(RoundedRectangle(cornerRadius: 25.0))
                             .onTapGesture {
-                                withAnimation(.spring()) {
+                                withAnimation(.bouncy) {
                                     selectedID = selectedID == nil ? connectionView.id : nil
                                 }
                             }
@@ -52,12 +52,12 @@ struct MainView: View {
             // MARK: Full Screen
             if let selected = selectedID, let index = agoraVM.rtcConnections.firstIndex(where: {$0.id == selected}), let remoteID = agoraVM.rtcConnections[index].remoteID {
                 fullscreenView
-                    .matchedGeometryEffect(id: agoraVM.rtcConnections[index].id, in: animationNamespace)
+                    .matchedGeometryEffect(id: selected, in: animationNamespace)
                     .ignoresSafeArea()
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .clipShape(RoundedRectangle(cornerRadius: 25.0))
                     .onTapGesture {
-                        withAnimation(.spring()) {
+                        withAnimation(.bouncy) {
                             selectedID = nil
                             
                             // Set it back to the small view nd subscribe low stream

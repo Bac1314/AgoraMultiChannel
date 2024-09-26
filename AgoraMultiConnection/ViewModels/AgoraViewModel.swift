@@ -15,7 +15,7 @@ class AgoraViewModel: NSObject, ObservableObject {
     
     // MARK: AGORA PROPERTIES
     var agoraKit: AgoraRtcEngineKit = AgoraRtcEngineKit()
-    var agoraAppID = ""
+    var agoraAppID = "d5af82b4b85e4838b2caec2a84e71cf3"
     
     @Published var rtcConnections : [AgoraConnectionView] = []
     @Published var agoraMultiDelegators : [AgoraMultiDelegator] = []
@@ -93,7 +93,6 @@ extension AgoraViewModel: AgoraMultiChannelDelegate {
     }
     
     func rtcEngine(_ engine: AgoraRtcEngineKit, connectionId: AgoraRtcConnection, didJoinedOfUid uid: UInt, elapsed: Int) {
-        print("Bac's didJoinedOfUid ")
         if let remoteIndex = rtcConnections.firstIndex(where: {$0.agoraConnection.channelId == connectionId.channelId}) {
             rtcConnections[remoteIndex].remoteID = uid
             agoraSetupRemoteVideo(connection: connectionId, remoteID: uid, remoteView: rtcConnections[remoteIndex].remoteUIViewRepresent.containerUIView, streamType: .low)
