@@ -15,7 +15,7 @@ class AgoraViewModel: NSObject, ObservableObject {
     
     // MARK: AGORA PROPERTIES
     var agoraKit: AgoraRtcEngineKit = AgoraRtcEngineKit()
-    var agoraAppID = "d5af82b4b85e4838b2caec2a84e71cf3"
+    var agoraAppID = ""
     
     @Published var rtcConnections : [AgoraConnectionView] = []
     @Published var agoraMultiDelegators : [AgoraMultiDelegator] = []
