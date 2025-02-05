@@ -15,6 +15,10 @@ protocol AgoraMultiChannelDelegate : NSObject {
     func rtcEngine(_ engine: AgoraRtcEngineKit, connectionId: AgoraRtcConnection, didJoinChannel channel: String, withUid uid: UInt, elapsed: Int)
     func rtcEngine(_ engine: AgoraRtcEngineKit, connectionId: AgoraRtcConnection, didJoinedOfUid uid: UInt, elapsed: Int)
     func rtcEngine(_ engine: AgoraRtcEngineKit, connectionId: AgoraRtcConnection, didOfflineOfUid uid: UInt, reason: AgoraUserOfflineReason)
+    
+    // New 02/05
+    func rtcEngine(_ engine: AgoraRtcEngineKit, connectionId: AgoraRtcConnection, tokenPrivilegeWillExpire token: String)
+    
 }
 
 
@@ -54,4 +58,12 @@ class AgoraMultiDelegator: NSObject, AgoraRtcEngineDelegate {
             self.connectionDelegate?.rtcEngine(engine, connectionId: connId, didOfflineOfUid: uid, reason: reason)
         }
     }
+    // New 02/05
+    func rtcEngine(_ engine: AgoraRtcEngineKit, connectionId: AgoraRtcConnection, tokenPrivilegeWillExpire token: String) {
+        if let connId = self.connectionId {
+            self.connectionDelegate?.rtcEngine(engine, connectionId: connId, tokenPrivilegeWillExpire: token)
+        }
+    }
+    
+    
 }
